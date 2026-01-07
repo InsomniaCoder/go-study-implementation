@@ -29,6 +29,11 @@ func NewTokenBucketRateLimiter(rps int, cap int) RateLimiter {
 
 func (rl *TokenBucketRateLimiter) Allow() bool {
 
+	//in reality, each lock would probably be 1-10 microseconds
+	//so this should ideally be able to take care of 1000 rps
+	//but better use, Atomic token bucket
+	// or shard the bucket per xxxx
+	// Lazy refill
 	rl.mu.Lock()
 	defer rl.mu.Unlock()
 
