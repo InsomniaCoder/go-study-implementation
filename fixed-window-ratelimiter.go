@@ -47,6 +47,7 @@ func (rl *FixedWindowLimiter) Allow() bool {
 	}
 }
 
-func run() {
-
-}
+//Cons
+// 	Burst problem at boundaries: 100 requests at 11:59:59 + 100 at 12:00:01 = 200 requests in 2 seconds (double the rate)
+//  Unfair: Users timing requests at window edges can exceed intended limits
+//  Less accurate: Rate enforcement is coarse-grained
